@@ -1,6 +1,17 @@
 <?php
 require 'includes/connection.php';
 session_start();
+
+// // On vérifie si les champs sont vides
+// if (!empty($_POST['email']) && !empty($_POST['password'])) {
+// 	$email = $_POST['email'];
+// 	$password = $_POST['password'];
+
+// 	// On écrit le SQL pour créer un nouveau conseiller
+// 	$sql = "INSERT INTO  `advisors` (`lastname`, `firstname`, `email`, `password`, `gpdr`, `created_at`) VALUES (:lastname, :firstname, :email, :password, :gpdr, NOW())";
+
+// }
+
 ?>
 
 <!DOCTYPE html>
