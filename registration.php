@@ -1,16 +1,43 @@
 <?php
+// Ce fichier enregistre un utilisateur sur la base de données
+
+// On se connecte à la base de données
 require 'includes/connection.php';
 session_start();
 
-if (isset($_POST['register'])) {
+if (!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_POST['gpdr'])) {
 	$lastname = $_POST['lastname'];
 	$firstname = $_POST['firstname'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+	$gpdr = $_POST['gpdr'];
 
-	var_dump("------->" . $lastname . " " . $firstname . " " . $email . " " . $password);
-	var_dump(isset($_POST['register']));
+	// On hash le mot de passe
+	password_hash($password, PASSWORD_ARGON2ID);
+
+	// On écrit le SQL
+	$sql = "INSERT INTO  `advisors` (`lastname`, `firstname`, `email`, `password`, `gpdr`, `created_at`) VALUES (:lastname, :firstname, :email, :password, :gpdr, NOW())";
+
+	// prepare
+	$query = $db->prepare($sql);
+
+	// bind
+	$query->bindValue(':lastname', $lastname, PDO::PARAM_STR);
+	$query->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+	$query->bindValue(':email', $email, PDO::PARAM_STR);
+	$query->bindValue(':password', $password, PDO::PARAM_STR);
+	$query->bindValue(':gpdr', $gpdr, PDO::PARAM_INT);
+
+	// execute
+	$query->execute();
+
+	// Rediriger vers index.php
+	header('Location: index.php');
+} else {
+	// Erreur
+	echo "Veuillez remplir tous les champs obligatoires et accepter les conditions.";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +76,12 @@ if (isset($_POST['register'])) {
 					<label>Password</label>
 					<input type="password" name="password" />
 				</div>
-				<br />
+				<label>
+					<input type="checkbox" name="gpdr">
+					gpdr check
+				</label>
 				<div>
-					<button name="register">Register</button>
+					<button type="submit">Register</button>
 				</div>
 				<a href="index.php">Login</a>
 			</form>

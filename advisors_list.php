@@ -19,10 +19,9 @@ $query = $db->query($sql);
 $advisors = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // APRES un fetchAll, il y a toujours une boucle
-foreach($advisors as $advisor) {
+foreach ($advisors as $advisor) {
     echo "<h1>{$advisor['lastname']}</h1>";
     echo "<h2>{$advisor['firstname']}</h2>";
     echo "<h3>{$advisor['email']}</h3>";
     echo "<h4>{$advisor['password']}</h4>";
-    
 }

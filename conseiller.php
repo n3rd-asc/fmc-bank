@@ -2,7 +2,7 @@
 //On affichera 1 conseiller
 var_dump($_GET['id']);
 // Je vérifie que j'ai un id dans l'url
-if(empty($_GET['id'])) {
+if (empty($_GET['id'])) {
     // Si pas d'id on redirige vers index.php
     header('Location: index.php');
     exit;
@@ -11,7 +11,7 @@ if(empty($_GET['id'])) {
 $id = $_GET['id'];
 
 // Je vérifie si l'id est numérique
-if(!is_numeric($id)) {
+if (!is_numeric($id)) {
     die('ID Invalid');
 }
 
