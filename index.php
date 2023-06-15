@@ -2,51 +2,77 @@
 require 'includes/connection.php';
 session_start();
 
-// // On vérifie si les champs sont vides
-// if (!empty($_POST['email']) && !empty($_POST['password'])) {
-// 	$email = $_POST['email'];
-// 	$password = $_POST['password'];
+// On vérifie si les champs sont vides
+if (!empty($_POST['email']) && !empty($_POST['password'])) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 
-// 	// On écrit le SQL pour créer un nouveau conseiller
-// 	$sql = "INSERT INTO  `advisors` (`lastname`, `firstname`, `email`, `password`, `gpdr`, `created_at`) VALUES (:lastname, :firstname, :email, :password, :gpdr, NOW())";
+	// On écrit le SQL
+	$sql = 'SELECT * FROM advisors WHERE email = :email ';
+	// prepare
+	$query = $db->prepare($sql);
 
-// }
+	// bind
+	$query->bindValue(':email', $email, PDO::PARAM_STR);
+
+	// execute
+	$query->execute();
+
+	$advisor = $query->fetch(PDO::FETCH_ASSOC);
+
+	if ($advisor && password_verify($password, $advisor['password'])) {
+		// Créer une session pour l'utilisateur avec l'email comme identifiant
+		$_SESSION['email'] = $advisor['email'];
+
+		// Rediriger vers home.php
+		header('Location: home.php');
+		exit();
+	} else {
+		// Erreur
+		echo "Vous avez saisi un identifiant ou un mot de passe invalide. Veuillez les ressaisir.";
+	}
+}
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Me connecter</title>
+	<link rel="icon" type="image/x-icon" href="icons/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/styles.min.css">
 </head>
 
 <body>
 	<nav>
 		<div>
-			<a href="">FMC Bank</a>
+			<a href=""><svg height="50" width="50">
+					<circle cx="50" cy="50" r="40" stroke="#333" stroke-width="3" fill="#fff" />
+				</svg> FMC Parisud</a>
 		</div>
 	</nav>
-	<div></div>
 	<div>
-		<h3>Login</h3>
-		<div></div>
+		<h3>Connexion</h3>
 		<div>
 			<form method="POST">
-				<h4>Login here...</h4>
 				<div>
-					<label>Email</label>
+					<label>Email :</label>
 					<input type="email" name="email" />
 				</div>
 				<div>
-					<label>Password</label>
+					<label>Mot de passe :</label>
 					<input type="password" name="password" />
 				</div>
 				<br />
 				<div>
-					<button type="submit">Login</button>
+					<button type="submit">Me connecter</button>
 				</div>
-				<a href="registration.php">Registration</a>
+				<a href="registration.php">M'enregistrer</a>
 			</form>
 		</div>
 	</div>

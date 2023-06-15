@@ -1,4 +1,5 @@
 <?php
+// Termine session && redirige vers index.php
     session_start();
     session_destroy();
     header('Location: index.php');

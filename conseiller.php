@@ -1,4 +1,6 @@
 <?php
+// FICHIER DE RÉF
+
 //On affichera 1 conseiller
 var_dump($_GET['id']);
 // Je vérifie que j'ai un id dans l'url

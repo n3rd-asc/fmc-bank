@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+body nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+body nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+body h2 {
+  margin-top: 30px;
+}
+body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+body table th,
+body table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+body table th {
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+}
+body div {
+  margin-bottom: 10px;
+}
+body h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+body a.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+body a.button:hover {
+  background-color: #555;
+}
+body button {
+  padding: 6px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+body button:hover {
+  background-color: #555;
+}
+body label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+body input[type=text],
+body input[type=email],
+body input[type=password] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+body input[type=text]:focus,
+body input[type=email]:focus,
+body input[type=password]:focus {
+  outline: none;
+  border-color: #555;
+}/*# sourceMappingURL=styles.css.map */

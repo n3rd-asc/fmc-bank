@@ -1,2 +1,2 @@
-# fmc-bank
-FMC Bank (Fake Money Capital Bank)
+# fmc-parisud
+FMC Parisud (Fake Money Capital)
