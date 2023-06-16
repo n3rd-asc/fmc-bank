@@ -52,7 +52,7 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tableau de bord :</title>
-	<link rel="icon" type="image/x-icon" href="icons/favicon.png">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;400;700&display=swap" rel="stylesheet">
@@ -68,7 +68,6 @@ if (isset($_SESSION['email'])) {
         </div>
     </nav>
     <div>
-        <h3>Tableau de bord</h3>
         <div>
             <h3>Welcome, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?> !</h3>
             <a href="logout.php">Logout</a>
@@ -100,7 +99,7 @@ if (isset($_SESSION['email'])) {
                     <td><?php echo $customer['zip']; ?></td>
                     <td><?php echo $customer['city']; ?></td>
                     <td><?php echo $customer['phone']; ?></td>
-                    <td> <button>Comptes</button> </td>
+                    <td><a href="accounts.php?customer_id=<?php echo $customer['id']; ?>">Comptes</a></td>
                     <td><button>Modifier</button></td>
                     <td><button>Supprimer</button></td>
                 </tr>
