@@ -98,21 +98,20 @@ if (isset($_SESSION['email'])) {
                     <circle cx="50" cy="50" r="40" stroke="#333" stroke-width="3" fill="#fff" />
                 </svg> FMC Parisud</a>
         </div>
+
         <ul id="advisor-actions" style="list-style-type: none; display:flex;">
-            <li><button>Ajouter un compte</button></li>
-            <li><button>Effectuer un dépôt</button></li>
-            <li><button>Effectuer un retrait</button></li>
-            <li><button>Autorisation de découvert</button></li>
-            <li><button>Fermer le compte</button></li>
+            <li><a class="account-actions" href="#">Ajouter un compte</a></li>
+            <li><a class="logout" href="logout.php">Logout</a></li>
+
         </ul>
     </nav>
     <div>
         <div>
-            <h3>Welcome, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?> !</h3>
-            <a href="logout.php">Logout</a>
+            <!-- <h3>Welcome, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?> !</h3> -->
         </div>
     </div>
 
+    <p>Bienvenue, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?>.</p>
     <h2>DÉTAIL DES COMPTES :</h2>
 
     <table>
@@ -122,6 +121,7 @@ if (isset($_SESSION['email'])) {
                 <th>Type de compte</th>
                 <th>Solde</th>
                 <th>Découvert autorisé</th>
+                <th>Gérer le compte</th>
             </tr>
         </thead>
         <tbody>
@@ -133,6 +133,10 @@ if (isset($_SESSION['email'])) {
                         <td><?php echo $account['type']; ?></td>
                         <td><?php echo $account['balance']; ?></td>
                         <td><?php echo $account['overdraft']; ?></td>
+                        <td><a class="links" href="#">Effectuer un dépôt</a>
+                        <a class="links" href="#">Effectuer un retrait</a>
+                        <a class="links" href="#">Autorisation de découvert</a>
+                        <a class="links" href="#">Fermer le compte</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>

@@ -66,15 +66,14 @@ if (isset($_SESSION['email'])) {
                     <circle cx="50" cy="50" r="40" stroke="#333" stroke-width="3" fill="#fff" />
                 </svg> FMC Parisud</a>
         </div>
-    </nav>
-    <div>
-        <div>
-            <h3>Welcome, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?> !</h3>
-            <a href="logout.php">Logout</a>
-        </div>
-    </div>
 
-    <h2>LISTE DES CLIENTS :</h2>
+        <ul id="advisor-actions" style="list-style-type: none; display:flex;">
+            <li><a class="logout" href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
+    <div></div>
+    <p>Bienvenue, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?>.</p>
+    <h2>TABLEAU DE BORD :</h2>
 
     <table>
         <thead>
@@ -86,8 +85,6 @@ if (isset($_SESSION['email'])) {
                 <th>VILLE</th>
                 <th>TÉLÉPHONE</th>
                 <th>GÉRER</th>
-                <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -99,9 +96,10 @@ if (isset($_SESSION['email'])) {
                     <td><?php echo $customer['zip']; ?></td>
                     <td><?php echo $customer['city']; ?></td>
                     <td><?php echo $customer['phone']; ?></td>
-                    <td><a href="accounts.php?customer_id=<?php echo $customer['id']; ?>">Comptes</a></td>
-                    <td><button>Modifier</button></td>
-                    <td><button>Supprimer</button></td>
+                    <td><a class="links" href="accounts.php?customer_id=<?php echo $customer['id']; ?>">Comptes Bancaires</a>
+                        <a class="links">Modifier le compte client</a>
+                        <a class="links">Supprimer le compte client</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

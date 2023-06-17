@@ -57,7 +57,8 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 		</div>
 	</nav>
 	<div>
-		<h3>Connexion</h3>
+		<div></div>
+		<h3>CONNEXION</h3>
 		<div>
 			<form method="POST">
 				<div>
