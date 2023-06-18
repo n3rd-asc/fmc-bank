@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 16, 2023 at 12:01 PM
+-- Generation Time: Jun 18, 2023 at 03:05 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -40,13 +40,12 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `type`, `balance`, `overdraft`, `costumers_id`) VALUES
-(1, 'Compte Courant', '7484.45', 100, 1),
 (2, 'Livret A', '10.00', 20, 4),
 (3, 'Compte Courant', '500.00', 200, 4),
-(4, 'Compte Courant', '1750847.00', 20000, 5),
 (5, 'Compte Courant', '1235.00', 200, 2),
 (6, 'Compte Courant', '1000000.73', 15000, 3),
-(7, 'Plan Épargne Logement', '57850.00', 0, 3);
+(7, 'Plan Épargne Logement', '57850.00', 0, 3),
+(8, 'Plan Épargne Logement', '50000.00', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,10 @@ INSERT INTO `advisors` (`id`, `email`, `password`, `lastname`, `firstname`, `gpd
 (46, 'ola@fmc.com', '$argon2id$v=19$m=65536,t=4,p=1$bnBEOHdxL2dFand6UmZ4WQ$dOnTspDt5NgXvEaewVKMQKh7G/RVm2hDCDCTguzCqAs', 'Olamain', 'Jules', 1, '2023-06-15 16:11:24'),
 (47, 'hernandez-jamon@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$WGEzMXM5dVNyaVdDZXFEag$SCQY8uVObz/ub6rsEfpba3gqR50Zn/Z5NsGe/JOObkI', 'Hernandes', 'Jamon', 1, '2023-06-15 17:16:00'),
 (48, 'Hekto@plasma.net', '$argon2id$v=19$m=65536,t=4,p=1$NkI0M0cyN09DM2U5OGJ6Vg$T85QHNb6lLycX5A41L/5q+qWQJ+dFn+195uYBKjD+qA', 'Hector', 'Berlioz', 1, '2023-06-15 17:17:48'),
-(49, 'CortexFrancis@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$NG43aVIzUkhjNWpHVDNrNw$8Id15sMD1S35kKIxWf2WcvtV6qjFex+xmijGj5DToO4', 'Cortex', 'Francis', 1, '2023-06-16 09:29:37');
+(49, 'CortexFrancis@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$NG43aVIzUkhjNWpHVDNrNw$8Id15sMD1S35kKIxWf2WcvtV6qjFex+xmijGj5DToO4', 'Cortex', 'Francis', 1, '2023-06-16 09:29:37'),
+(50, 'regisduf@gmc.com', '$argon2id$v=19$m=65536,t=4,p=1$bEtERmQydDJ4ejNKQU9GZg$75moGoBwOQggO8OXb7othBDqSnY15GcjET9Ixo7P2W4', 'Régis', 'Dufrays', 1, '2023-06-17 12:25:38'),
+(51, 'koalasparrow@aol.com', '$argon2id$v=19$m=65536,t=4,p=1$VVN5SVBRS3VvQnJMRXJXSg$28qkwRX527M+GqJIMMYm08rNIHGx0oGkvtwPH6hbWtM', 'Koala', 'Sparrow', 1, '2023-06-17 20:35:58'),
+(52, 'superconseiller@fmc.online', '$argon2id$v=19$m=65536,t=4,p=1$S2l0ajFwVG13RE91ZC85YQ$zHYhRzc5Pz1inFYxXUT8S6O0vvU9PxibBUKU7P9hp24', 'Super', 'Conseiller', 1, '2023-06-18 16:55:01');
 
 -- --------------------------------------------------------
 
@@ -131,11 +133,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `email`, `lastname`, `firstname`, `birth_date`, `address`, `address_comp`, `zip`, `city`, `phone`, `gpdr`, `created_at`, `advisors_id`) VALUES
-(1, 'john-doe@fake.com', 'Doe', 'John', '2032-04-07', '21 rue de la brouette', 'Hameau Portugais', 'TRU3773', 'Macon', '0156565656', 1, '2023-06-09 12:43:54', 35),
-(2, 'franck-denis@fake.com', 'Denis', 'Franck', '2033-06-23', '25 avenue du turfu', 'Hameau du Turfu', '!DF7DF#', 'TurfuLand', '01020164094', 1, '2023-06-09 13:46:37', 48),
-(3, 'justin-hamidou@fake.com', 'Justin', 'Hamidou', '2014-06-09', '8 hameau de Sens', '', '54654', 'New York', '016054840', 1, '2023-06-09 13:48:52', 46),
-(4, 'lucie-chida@fake.com', 'Chida', 'Lucie', '2023-06-04', '12 Schlampe Strasse', '12-13 bis', '49J8F8D', 'Hermanner', '0640546400', 1, '2023-06-09 13:50:42', 32),
-(5, 'turuk-turuk@fake.com', 'Turuk', 'Turuk', '2013-06-19', '2 rue du chameau', 'Le drodro', '7897987', 'Desert', '50416041', 1, '2023-06-09 13:52:15', 35);
+(2, 'franck-denis@fake.com', 'Denisette', 'Franck', '2033-06-23', '25 avenue du turfu', 'Hameau du Turfu', '!DF7DF#', 'TurfuLand', '01020164094', 1, '2023-06-09 13:46:37', 35),
+(3, 'justin-hamidou@fake.com', 'Justin', 'Hamidou', '2014-06-09', '8 hameau de Sens', '', '54654', 'New York', '016054840', 1, '2023-06-09 13:48:52', 35),
+(4, 'lucie-chida@fake.com', 'Chida', 'Lucie', '2023-06-04', '12 Schlampe Strasse', '12-13 bis', '49J8F8D', 'Hermanner', '0640546400', 1, '2023-06-09 13:50:42', 35),
+(11, 'eddymurphy@hollywood.com', 'Murphy', 'Eddy', '1975-05-14', '12 Beverly Hills', 'Madison Square', '5D69DFD', 'Hollywood', '546164156263', 0, '2023-06-18 16:52:38', 35),
+(12, 'henriettejosianne@client.offline', 'Henriette', 'Josianne', '1980-02-02', 'aucune adresse', 'tkt', '7qsd75', 'Harley', '64656551351', 0, '2023-06-18 16:55:53', 52);
 
 --
 -- Indexes for dumped tables
@@ -169,19 +171,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `advisors`
 --
 ALTER TABLE `advisors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

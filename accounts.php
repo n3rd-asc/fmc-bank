@@ -100,7 +100,8 @@ if (isset($_SESSION['email'])) {
         </div>
 
         <ul id="advisor-actions" style="list-style-type: none; display:flex;">
-            <li><a class="account-actions" href="#">Ajouter un compte</a></li>
+            <li><a class="account-actions" href="home.php">Tableau de bord</a></li>
+            <li><a class="account-actions" href="add_account.php?customer_id=<?php echo $customer_id; ?>">Ajouter un compte</a></li>
             <li><a class="logout" href="logout.php">Logout</a></li>
 
         </ul>
@@ -134,9 +135,10 @@ if (isset($_SESSION['email'])) {
                         <td><?php echo $account['balance']; ?></td>
                         <td><?php echo $account['overdraft']; ?></td>
                         <td><a class="links" href="#">Effectuer un dépôt</a>
-                        <a class="links" href="#">Effectuer un retrait</a>
-                        <a class="links" href="#">Autorisation de découvert</a>
-                        <a class="links" href="#">Fermer le compte</a></td>
+                            <a class="links" href="#">Effectuer un retrait</a>
+                            <a class="links" href="#">Autorisation de découvert</a>
+                            <a class="links" href="#">Fermer le compte</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
