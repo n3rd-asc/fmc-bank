@@ -15,9 +15,17 @@
 </head>
 
 <body>
+    <nav>
+        <div>
+            <a href=""><svg height="50" width="50">
+                    <circle cx="50" cy="50" r="40" stroke="#333" stroke-width="3" fill="#fff" />
+                </svg> FMC Parisud</a>
+        </div>
+    </nav>
+    <div></div>
     <h1>Une erreur s'est produite</h1>
     <p>Une erreur s'est produite lors du traitement de votre demande.</p>
-    <p>Veuillez réessayer ultérieurement ou contacter l'administrateur du site.</p>
+    <p>Veuillez réessayer ultérieurement.</p>
     <div></div>
     <a href="home.php" class="links">Retour au tableau de bord</a>
 </body>

@@ -1,4 +1,5 @@
 const registerForm = document.querySelector('#registerForm');
+const errorSpan = document.querySelector('#errorSpan');
 
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -8,22 +9,22 @@ registerForm.addEventListener('submit', async (e) => {
 
     // Vérification des critères du mot de passe
     if (!/[A-Z]/.test(password)) {
-        console.log('Le mot de passe doit contenir au moins une lettre majuscule (Uppercase missing).');
+        errorSpan.textContent = 'Le mot de passe doit contenir au moins une lettre majuscule (Uppercase missing).';
         return;
     }
 
     if (!/[0-9]/.test(password)) {
-        console.log('Le mot de passe doit contenir au moins un chiffre (Number missing).');
+        errorSpan.textContent = 'Le mot de passe doit contenir au moins un chiffre (Number missing).';
         return;
     }
 
     if (!/[!@#$%^&*]/.test(password)) {
-        console.log('Le mot de passe doit contenir au moins un caractère spécial (Special char missing).');
+        errorSpan.textContent = 'Le mot de passe doit contenir au moins un caractère spécial (Special char missing).';
         return;
     }
 
     if (password.length < 16) {
-        console.log('Le mot de passe est trop court, il doit contenir au moins 16 caractères (Too short, password must be at least 16 characters long).');
+        errorSpan.textContent = 'Le mot de passe est trop court, il doit contenir au moins 16 caractères.';
         return;
     }
 
@@ -39,12 +40,12 @@ registerForm.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
-            // Redirection vers la page de succès ou autre traitement
+            // Redirection vers le tableau de bord home.php
             window.location.href = 'home.php';
         } else {
-            // Affichage de l'erreur retournée par le serveur
+            // Affichage de l'erreur
             const errorData = await response.json();
-            console.log(errorData.error);
+            errorSpan.textContent = errorData.error;
         }
     } catch (error) {
         console.log("Une erreur s'est produite lors de l'envoi du formulaire.", error);

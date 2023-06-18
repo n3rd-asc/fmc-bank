@@ -1,5 +1,5 @@
 <?php
-// Ce fichier permet d'ajouter un nouveau compte.
+// Ce fichier permet d'ajouter un nouveau compte au client selectionné
 
 // On se connecte à la base de données
 require 'includes/connection.php';
@@ -9,7 +9,7 @@ session_start();
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: accounts.php?customer_id=" . $_GET['customer_id']);
         exit();
     } else {
-        // Gérer l'erreur d'insertion en base de données
+        // Erreur
         echo "Une erreur s'est produite lors de l'ajout du compte en base de données.";
     }
 }

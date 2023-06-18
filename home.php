@@ -1,5 +1,5 @@
 <?php
-// <!-- Ce fichier est le tableau de bord qui affiche tous les clients du conseiller connecté. -->
+// Ce fichier est le tableau de bord qui affiche tous les clients du conseiller connecté.
 
 // On se connecte à la base de données
 require 'includes/connection.php';
@@ -39,7 +39,7 @@ if (isset($_SESSION['email'])) {
     $customers = $query->fetchAll(PDO::FETCH_ASSOC);
 } else {
     // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 ?>
@@ -98,8 +98,8 @@ if (isset($_SESSION['email'])) {
                     <td><?php echo $customer['phone']; ?></td>
                     <td>
                         <a class="links" href="accounts.php?customer_id=<?php echo $customer['id']; ?>">Comptes Bancaires</a>
-                        <a class="links" href="edit_customer.php?customer_id=<?php echo $customer['id']; ?>">Modifier le compte client</a>
-                        <a class="links" href="del_customer.php?customer_id=<?php echo $customer['id']; ?>">Supprimer le compte client</a>
+                        <a class="links" href="edit_customer.php?customer_id=<?php echo $customer['id']; ?>">Modifier le client</a>
+                        <a class="links" href="del_customer.php?customer_id=<?php echo $customer['id']; ?>">Supprimer le client</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

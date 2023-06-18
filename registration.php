@@ -115,7 +115,7 @@ if (!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['
 				<label>
 					<input type="checkbox" value="1" name="gpdr"> J'accepte la collecte de mes données dans le cadre du RGPD.
 				</label>
-				<div></div>
+				<div><span id="errorSpan"></span></div>
 				<div>
 					<button type="submit">M'inscrire</button>
 				</div>

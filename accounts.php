@@ -1,4 +1,6 @@
 <?php
+// Ce fichier affiche les comptes bancaires du client selectionné depuis la page home.php
+
 // Quand l'utilisateur est connecté
 
 // On se connecte à la base de données
@@ -27,7 +29,7 @@ $advisor = $query->fetch(PDO::FETCH_ASSOC);
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['email'])) {
-    // Récupérer l'e-mail de l'utilisateur connecté
+    // Récupérer l'email de l'utilisateur connecté
     $email = $_SESSION['email'];
 
     // Requête SQL pour récupérer la liste des clients de l'utilisateur connecté
@@ -106,19 +108,17 @@ if (isset($_SESSION['email'])) {
 
         </ul>
     </nav>
-    <div>
-        <div>
-            <!-- <h3>Welcome, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?> !</h3> -->
-        </div>
-    </div>
-
+    <div></div>
     <p>Bienvenue, <?php echo $advisor['lastname'] . ' ' . $advisor['firstname']; ?>.</p>
-    <h2>DÉTAIL DES COMPTES :</h2>
+    <?php if (isset($selected_customer)) : ?>
+        <h2>DÉTAIL DES COMPTES : <?php echo '<h2>Client : [ ' . $selected_customer['lastname'] . ' ' . $selected_customer['firstname'] . ' ]</h2>'; ?></h2>
+    <?php endif; ?>
+
 
     <table>
         <thead>
             <tr>
-                <th>Client</th>
+                <!-- <th>Client</th> -->
                 <th>Type de compte</th>
                 <th>Solde</th>
                 <th>Découvert autorisé</th>
@@ -130,14 +130,14 @@ if (isset($_SESSION['email'])) {
                 <?php $customer = $selected_customer; ?>
                 <?php foreach ($accounts as $account) : ?>
                     <tr>
-                        <td><?php echo $customer['lastname'] . ' ' . $customer['firstname']; ?></td>
+                        <!-- <td><?php echo $customer['lastname'] . ' ' . $customer['firstname']; ?></td> -->
                         <td><?php echo $account['type']; ?></td>
-                        <td><?php echo $account['balance']; ?></td>
-                        <td><?php echo $account['overdraft']; ?></td>
-                        <td><a class="links" href="#">Effectuer un dépôt</a>
-                            <a class="links" href="#">Effectuer un retrait</a>
-                            <a class="links" href="#">Autorisation de découvert</a>
-                            <a class="links" href="#">Fermer le compte</a>
+                        <td><?php echo number_format($account['balance'], 2, ',', ' ') . ' €'; ?></td>
+                        <td><?php echo number_format($account['overdraft'], 2, ',', ' ') . ' €'; ?></td>
+                        <td><a class="links" href="deposit.php?customer_id=<?php echo $_GET['customer_id']; ?>">Effectuer un dépôt</a>
+                            <a class="links" href="withdraw.php?customer_id=<?php echo $_GET['customer_id']; ?>">Effectuer un retrait</a>
+                            <a class="links" href="edit_overdraft.php?customer_id=<?php echo $_GET['customer_id']; ?>">Autorisation de découvert</a>
+                            <a class="links" href="del_account.php?account_id=<?php echo $account['id']; ?>">Supprimer le compte bancaire</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -161,8 +161,8 @@ if (isset($_SESSION['email'])) {
                         <tr>
                             <td><?php echo $customer['lastname'] . ' ' . $customer['firstname']; ?></td>
                             <td><?php echo $account['type']; ?></td>
-                            <td><?php echo $account['balance']; ?></td>
-                            <td><?php echo $account['overdraft']; ?></td>
+                            <td><?php echo number_format($account['balance'], 2, ',', ' ') . ' €'; ?></td>
+                            <td><?php echo number_format($account['overdraft'], 2, ',', ' ') . ' €'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endforeach; ?>

@@ -1,5 +1,5 @@
 <?php
-// <!-- Ce fichier permet d'ajouter un nouveau client. -->
+// Ce fichier permet d'ajouter un nouveau client
 
 // On se connecte à la base de données
 require 'includes/connection.php';
@@ -9,7 +9,7 @@ session_start();
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: home.php");
         exit();
     } else {
-        // Gérer l'erreur d'insertion en base de données
+        // Erreur
         echo "Une erreur s'est produite lors de l'ajout du client en base de données.";
     }
 }
@@ -99,47 +99,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div>
                     <label>Nom :</label>
                     <input type="text" name="lastname" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Prénom :</label>
                     <input type="text" name="firstname" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Email :</label>
                     <input type="email" name="email" required />
-                    <span>(Format attendu: adresse email)</span>
+                    <span>* (Format attendu: adresse email)</span>
                 </div>
                 <div>
                     <label>Date de naissance :</label>
                     <input type="text" name="birth_date" required />
-                    <span>(Format attendu: yyyy-mm-dd)</span>
+                    <span>* (Format attendu: yyyy-mm-dd)</span>
                 </div>
                 <div>
                     <label>Adresse :</label>
                     <input type="text" name="address" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Complément d'adresse :</label>
                     <input type="text" name="address_comp" />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Code Postal :</label>
                     <input type="text" name="zip" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Ville :</label>
                     <input type="text" name="city" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <label>Téléphone :</label>
                     <input type="text" name="phone" required />
-                    <span>(Format attendu: texte)</span>
+                    <span>* (Format attendu: texte)</span>
                 </div>
                 <div>
                     <!-- CONSEILLER ATTRIBUÉ  -->

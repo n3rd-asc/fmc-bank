@@ -11,6 +11,13 @@ body {
   padding: 20px;
 }
 
+span,
+.errormsg {
+  color: rgb(255, 42, 42);
+  font-size: 15px;
+  font-style: italic;
+}
+
 select {
   background-color: #fff;
   padding: 10px;
