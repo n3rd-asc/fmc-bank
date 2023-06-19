@@ -30,31 +30,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accountId = $_POST['account_id'];
     $amount = $_POST['amount'];
 
-    // Vérifier si le compte appartient bien au client
-    $sqlCheckAccount = "SELECT * FROM accounts WHERE id = :accountId AND costumers_id = :customerId";
-    $queryCheckAccount = $db->prepare($sqlCheckAccount);
-    $queryCheckAccount->bindValue(':accountId', $accountId, PDO::PARAM_INT);
-    $queryCheckAccount->bindValue(':customerId', $customerId, PDO::PARAM_INT);
-    $queryCheckAccount->execute();
+    // Récupérer le solde actuel du compte
+    $sqlGetBalance = "SELECT * FROM accounts WHERE id = :accountId";
+    $queryGetBalance = $db->prepare($sqlGetBalance);
+    $queryGetBalance->bindValue(':accountId', $accountId, PDO::PARAM_INT);
+    $queryGetBalance->execute();
 
-    if ($queryCheckAccount->rowCount() > 0) {
-        // Le compte appartient au client, procéder au retrait
-        $sqlWithdraw = "UPDATE accounts SET balance = balance - :amount WHERE id = :accountId";
-        $queryWithdraw = $db->prepare($sqlWithdraw);
-        $queryWithdraw->bindValue(':amount', $amount, PDO::PARAM_STR);
-        $queryWithdraw->bindValue(':accountId', $accountId, PDO::PARAM_INT);
+    if ($queryGetBalance->rowCount() > 0) {
+        $row = $queryGetBalance->fetch(PDO::FETCH_ASSOC);
+        $currentBalance = $row['balance'];
+        $overdraftLimit = $row['overdraft'];
 
-        if ($queryWithdraw->execute()) {
-            // Rediriger vers la page des comptes avec l'ID du client dans l'URL
-            header("Location: accounts.php?customer_id=" . $customerId);
-            exit();
+        // Calculer le solde disponible avec découvert
+        $availableBalance = $currentBalance + $overdraftLimit;
+        
+        // Vérifier si le montant du retrait dépasse le solde disponible avec découvert
+        if ($amount <= $availableBalance) {
+            // Le montant du retrait est autorisé, procéder à la mise à jour du solde
+            $newBalance = $currentBalance - $amount;
+            // Effectuer la mise à jour du solde du compte
+            $sqlWithdraw = "UPDATE accounts SET balance = :newBalance WHERE id = :accountId";
+            $queryWithdraw = $db->prepare($sqlWithdraw);
+            $queryWithdraw->bindValue(':newBalance', $newBalance, PDO::PARAM_STR);
+            $queryWithdraw->bindValue(':accountId', $accountId, PDO::PARAM_INT);
+            
+            if ($queryWithdraw->execute()) {
+                // Rediriger vers la page des comptes avec l'ID du client dans l'URL
+                header("Location: accounts.php?customer_id=" . $customerId);
+                exit();
+            } else {
+                // Gérer l'erreur de retrait en base de données
+                header("Location: error.php");
+                exit();
+            }
         } else {
-            // Gérer l'erreur de retrait en base de données
-            header("Location: error.php");
+            // Le montant du retrait dépasse le solde disponible avec découvert autorisé
+            header("Location: insufficient_founds.php");
             exit();
         }
     } else {
-        // Le compte n'appartient pas au client, rediriger vers la page d'erreur
+        // Le compte n'existe pas ou une erreur s'est produite lors de la récupération du solde
         header("Location: error.php");
         exit();
     }
