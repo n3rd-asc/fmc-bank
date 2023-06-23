@@ -6,10 +6,12 @@ session_start();
 
 $error_message = ""; // Définition de la variable $error_message avec une valeur par défaut pour afficher l'erreur
 
+$email=$_POST ;
 // On vérifie si les champs sont vides
 if (!empty($_POST['email']) && !empty($_POST['password'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
+	}
 
 	// On écrit le SQL
 	$sql = 'SELECT * FROM advisors WHERE email = :email ';
@@ -25,17 +27,16 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 	$advisor = $query->fetch(PDO::FETCH_ASSOC);
 
 	if ($advisor && password_verify($password, $advisor['password'])) {
+
 		// Créer une session pour l'utilisateur avec l'email comme identifiant
 		$_SESSION['email'] = $advisor['email'];
 
 		// Rediriger vers home.php
 		header('Location: home.php');
 		exit();
-	} else {
-		// Erreur
-		$error_message = "Vous avez saisi un identifiant ou un mot de passe invalide. Veuillez les ressaisir.";
-	}
-}
+
+	} 
+
 
 ?>
 
