@@ -9,8 +9,8 @@
 	// On vérifie si les champs sont vides
 
 	if (!empty($_POST['lastname']) && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['gpdr'])) {
-		$lastname = $_POST['lastname'];
-		$firstname = $_POST['firstname'];
+		$lastname = htmlspecialchars($_POST['lastname']);
+		$firstname = htmlspecialchars($_POST['firstname']);
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$gpdr = $_POST['gpdr'];
